@@ -12,18 +12,24 @@ version: 1
 # package_version: 1.2.0               # optional; default: version in the port's pyproject.toml
 # org_home: https://github.com/omicverse/omicverse-org-home.git   # default
 
+# Names as printed, given name first: "Xu Meng" for 孟旭 (surname Meng). Citations take the last
+# word as the surname, so write the surname last.
 authors:                               # in order; an email marks a corresponding author
   - {name: First Author, affiliations: [1, 2], email: first@example.org}
   - {name: Second Author, affiliations: [3]}
 affiliations:
   1: Department, Institution, City, Postcode, Country
-  2: OmicVerse, Inc., San Francisco, CA, USA
+  2: OmicVerse, Inc., San Francisco, CA 94114, USA
   3: Department, Institution, City, Postcode, Country
 
 links:
   code: https://github.com/omicverse/py-<pkg>
   # api: ov.single.<function>          # how OmicVerse exposes the package, if it does
 
+# ai_declaration: >-                  # default: the authors' standard declaration (tools/prepare.py)
+#   The authors used ...
+# conflicts: >-                        # default: company affiliations disclosed by initials
+#   Z.Z. and X.M. are affiliated with OmicVerse, Inc.
 # doi: 10.20944/preprints2026xx.xxxx.v1  # once the preprint is posted
 # preprint: {server: Preprints.org, posted: 2026-01-15}
 # notes: >-                            # anything else the writers should know

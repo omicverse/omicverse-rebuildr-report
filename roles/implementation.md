@@ -8,8 +8,13 @@ about the package, with the file each fact came from.
 `R/guide/EVIDENCE.md` (the table at the end says where each part comes from), then in `W/port/`:
 README.md, port.yaml, pyproject.toml, CHANGELOG.md (current release entry only — features, not
 bug stories), the package source (`__init__.py` for the public API, the kernels, threading),
-`tests/` (count the parity tests; how references are generated, e.g. `tests/data/make_reference.R`;
-which upstream and dependency versions they pin).
+`tests/` (count the tests and, separately, the tests that compare against upstream reference
+output — report both numbers, never one number for both; how references are generated, e.g.
+`tests/data/make_reference.R`; which upstream and dependency versions they pin).
+
+Check the package name: is the PyPI name or the import name already used by another project
+(`https://pypi.org/pypi/<name>/json`), and are there other Python ports of the same upstream package
+(PyPI and GitHub search)? Record what they are; the report names them neutrally.
 
 Then the OmicVerse integration: `gh search code "<package>" --repo omicverse/omicverse` and read the
 calling code (`gh api repos/omicverse/omicverse/contents/<path> --jq .content | base64 -d`) to get

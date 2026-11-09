@@ -96,7 +96,9 @@ references, numbers that cannot be traced to the evidence, leftover placeholders
 ## Validation
 
 [examples/pyedger](examples/pyedger) is the request for the pyedger report
-([omicverse.org/articles/pyedger](https://omicverse.org/articles/pyedger)). Running the workflow on
-it with `"blind": true` deletes the published report from the work directory and rebuilds it from
-the evidence alone; [examples/pyedger/VALIDATION.md](examples/pyedger/VALIDATION.md) compares the
-result with the published version.
+([omicverse.org/articles/pyedger](https://omicverse.org/articles/pyedger)). With `"blind": true`
+the workflow deletes the published report from the work directory and rebuilds it from the evidence
+alone. The first blind run (14 agents, 74 minutes, about 2.7 M tokens) matched the published report
+in structure, tone and results, checked facts more finely and found more references, but was 40%
+longer. The guides and lint now enforce the length budgets. Details, outputs and the comparison:
+[examples/pyedger/VALIDATION.md](examples/pyedger/VALIDATION.md).

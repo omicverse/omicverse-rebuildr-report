@@ -3,7 +3,13 @@
 A report on a rebuilt package is an **application note**: it says what the package is, how it is
 built, and shows on real data that it gives the same results as the original. The model is a
 *Bioinformatics* Applications Note: about
-1,200–2,000 words of main text, one main figure, one table, a supplement, 20–35 references.
+1,200–1,700 words of main text, one main figure, one table, a short supplement, 20–35 references;
+five or six pages in the two-column PDF.
+
+**Concision is a requirement, not a preference.** When a detail is true but a reader does not
+need it to understand or reproduce the result, leave it out (the repository keeps it). Every
+paragraph should carry one point. A blind rebuild that knew more than the published report was
+still worse for saying all of it.
 
 Write the report in British English (normalisation, tumour, modelling), as the published reports are.
 
@@ -16,7 +22,7 @@ The title says what the package is. It makes no claim: no "faithful", "exact", "
 "reproduces", "to numerical precision", "fast", "drop-in", "validated". Claims belong in the
 abstract and the results, where the evidence is.
 
-## Abstract (`meta.yaml: abstract`), 150–220 words, one paragraph
+## Abstract (`meta.yaml: abstract`), 130–190 words, one paragraph
 
 1. What the package is and what it covers (one sentence, list the main methods).
 2. How it is built (one sentence: ported from the upstream code paths, versioned against a release).
@@ -30,7 +36,7 @@ Plain text only (no Markdown, no `$…$`): the list page shows it as text. Unico
 
 Sections are `#` headings, subsections `##`. Word budgets are targets, not limits.
 
-### `# Introduction` (4 paragraphs, 250–450 words)
+### `# Introduction` (4 paragraphs, 250–400 words)
 
 1. **The task and the upstream method.** What the analysis is for, why the upstream package is
    the standard (cite its papers), what its key ideas are (cite the method papers).
@@ -43,7 +49,7 @@ Sections are `#` headings, subsections `##`. Word budgets are targets, not limit
 4. **Here we present.** "Here we present <package>, … We describe its implementation and compare
    it with <Upstream> <version> on <data>."
 
-### `# Implementation` (500–750 words)
+### `# Implementation` (450–650 words)
 
 - `## Statistical model` (or `## Method`): one paragraph on the model the upstream package fits,
   in plain terms, with citations for each component. No code names unless needed.
@@ -60,7 +66,7 @@ Sections are `#` headings, subsections `##`. Word budgets are targets, not limit
 - `## Use in OmicVerse` (if integrated): the exact API (function and arguments) and
   which OmicVerse features use the package. Check the OmicVerse source; do not guess.
 
-### `# Comparison with <Upstream> on <data>` (400–650 words)
+### `# Comparison with <Upstream> on <data>` (400–550 words)
 
 - `## Data and design`: cohorts, sample sizes, the comparison made, the small-sample regime,
   the exact pipeline both packages ran, thresholds, and the criteria compared (calls, downstream
@@ -74,7 +80,7 @@ Sections are `#` headings, subsections `##`. Word budgets are targets, not limit
 The main figure goes in this section as a `:::figure 1 fig1.jpg` block after the paragraph that
 first cites it.
 
-### `# Conclusion and future perspectives` (2 paragraphs, 150–300 words)
+### `# Conclusion and future perspectives` (2 paragraphs, 150–280 words)
 
 1. What the package gives users, restating the headline results positively, and what the
    integration makes possible.
@@ -87,11 +93,13 @@ first cites it.
 - `#* Data and code availability`: licence, PyPI, repository, where the benchmark scripts are,
   data sources with URLs and access date, software versions (Python side and R side), hardware.
   Neutral; no remarks about the machine being shared or busy.
-- `#* Use of AI tools`: required by preprint servers. State what AI tools were used for (code,
-  benchmark scripts, drafting and editing) — check the port repository's commit trailers
-  (`Co-Authored-By: Claude …`) — and that the authors take responsibility.
-- `#* Conflicts of interest`: required by preprint servers. Draft from the affiliations (a company
-  affiliation is disclosed) and mark it for the authors to confirm.
+- `#* Declaration of generative AI and AI-assisted technologies`: required by preprint servers.
+  Use `ai_declaration` from the request verbatim (`tools/prepare.py` fills in the authors' standard
+  text when the request has none). Do not rewrite it.
+- `#* Conflicts of interest`: required by preprint servers. Use `conflicts` from the request if
+  given. Otherwise disclose every company affiliation by initials ("Z.Z. and X.M. are affiliated
+  with OmicVerse, Inc."), and add "The other authors declare no conflicts of interest." only when
+  there are other authors. The authors confirm it.
 
 ## `# References`
 
@@ -99,7 +107,7 @@ Numbered in order of first citation, one line each, ending with the DOI (guide/R
 
 ## `# Supplementary information`
 
-- `## Supplementary methods`: paragraphs with bold lead-ins — data processing (how counts were
+- `## Supplementary methods` (at most 600–700 words): paragraphs with bold lead-ins — data processing (how counts were
   obtained, what was removed and why), sampling of small-sample draws, downstream-analysis settings
   (ranking statistic, gene sets, size limits, thresholds, seeds), run-time set-up (stated neutrally:
   "one run per cohort and configuration, BLAS pinned to one thread"), implementation details that
@@ -119,3 +127,5 @@ column names the quantity and its largest relative difference (`P-value $2 \time
 
 Title line: what the figure compares ("pyfoo 1.4.0 versus fooR 2.1.3 on <data>."). Legend: one bold panel label per panel (`**(a)**`), each saying what is plotted,
 axes, colours and thresholds. No interpretation, no caveats, no remarks about how it was run.
+At most 180 words: a full-width figure plus a longer legend no longer fits on a page with text and
+ends up alone on a page with a blank band under it.

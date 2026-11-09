@@ -147,8 +147,10 @@ def cmd_check(path: str) -> int:
             failures += 1
             print(f"[{n}] DOI-NOT-FOUND {doi}: {e}")
             continue
-        title_ok = difflib.SequenceMatcher(None, meta["title"].lower(), body.lower()).find_longest_match(
-            0, len(meta["title"]), 0, len(body)).size >= min(40, int(0.6 * len(meta["title"])))
+        norm = lambda x: re.sub(r"[^a-z0-9]+", " ", x.lower()).strip()      # noqa: E731
+        t, b = norm(meta["title"]), norm(body)
+        title_ok = t in b or difflib.SequenceMatcher(None, t, b, autojunk=False).find_longest_match(
+            0, len(t), 0, len(b)).size >= min(40, int(0.6 * len(t)))
         first = (meta["authors"][0].split()[0] if meta["authors"] else "").lower()
         author_ok = (not first) or first in body.lower()
         ym = re.search(r"\((\d{4})\)", body)

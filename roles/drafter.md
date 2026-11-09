@@ -28,15 +28,20 @@ name), `published`, `version`, `authors`, `affiliations` (from the request), `ab
 - Introduction (4 paragraphs) → Implementation (model, features + Table 1, parity, performance, use in
   OmicVerse) → Comparison with <Upstream> on <data> (data and design, results subsections, Fig. 1
   block after the paragraph that first cites it) → Conclusion and future perspectives → `#* Data and
-  code availability` → `#* Use of AI tools` → `#* Conflicts of interest` → `# References` →
+  code availability` → `#* Declaration of generative AI and AI-assisted technologies` →
+  `#* Conflicts of interest` → `# References` →
   `# Supplementary information` (Supplementary methods, Notes for users coming from R, Fig. S1 …).
 - Cite with `[@n]`, numbering references in order of first appearance; copy reference lines from
   `evidence/references.md` (its `line` column), renumbered. Drop references you do not cite.
 - Every number from numbers.json, the evidence notes or a derived-number line in benchmark.md.
   Use one form per metric (guide/STYLE.md §5).
-- Use of AI tools: from implementation.md's AI-assistance section. Conflicts of interest: disclose
-  any company affiliation in the request ("X.Y. is affiliated with <company>."); the other authors
-  "declare no conflicts of interest". These two are drafts for the authors to confirm.
+- `#* Declaration of generative AI and AI-assisted technologies`: `ai_declaration` from
+  `W/request.json`, verbatim. `#* Conflicts of interest`: `conflicts` from the request, or the rule in
+  guide/STRUCTURE.md (company affiliations by initials).
+- **Be brief.** Main text 1,200–1,700 words, abstract 130–190, Supplementary methods under 700,
+  each legend under 180. Choose what to leave out: a detail that is true but not needed to follow
+  or reproduce the result stays in the repository. Fewer, more important numbers in the text;
+  the rest in Table 1. The lint `length` warnings must all be gone before you return.
 - No placeholders, no TODOs, no HTML comments: `article.md` is rendered as it is.
 
 ## Check, fix, repeat

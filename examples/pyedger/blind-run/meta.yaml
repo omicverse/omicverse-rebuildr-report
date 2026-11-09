@@ -1,0 +1,39 @@
+# Article metadata. The body lives in article.md; figures in figures/.
+# Build: python3 scripts/build_articles.py --pdf   (see docs/ARTICLES.md)
+slug: pyedger
+type: Technical Report
+title: "pyedger: a Python implementation of edgeR for differential expression analysis of count data"
+short_title: pyedger
+published: 2026-11-09
+version: 1
+authors:
+  - {name: Zehua Zeng, affiliations: [1, 2], email: starlitnightly@gmail.com}
+  - {name: Meng Xu, affiliations: [3]}
+  - {name: Hongwu Du, affiliations: [4, 5], email: hongwudu@ustb.edu.cn}
+affiliations:
+  1: Department of Genetics, Stanford University, Stanford, CA 94305, USA
+  2: OmicVerse, Inc., San Francisco, CA, USA
+  3: Hubei Key Laboratory of Agricultural Bioinformatics, College of Informatics, Huazhong Agricultural University, Wuhan 430070, China
+  4: School of Chemistry and Biological Engineering, University of Science and Technology Beijing, Beijing 100083, China
+  5: Daxing Research Institute, University of Science and Technology Beijing, Beijing 100083, China
+abstract: >-
+  pyedger is a Python implementation of the Bioconductor package edgeR for differential expression analysis
+  of count data. It covers TMM normalisation and filterByExpr; common, trended and tagwise dispersion
+  estimation; negative binomial generalised linear models with likelihood-ratio and quasi-likelihood
+  F-tests; tests against a fold-change threshold; and the classic exact test. Each function is available
+  under its edgeR name and a Python name. pyedger was ported step by step from edgeR's compiled routines
+  and from the limma and locfit code that edgeR calls, and it is versioned against edgeR 4.10.5. We
+  compared pyedger 0.2.3 with edgeR 4.10.5 on eight tumour–normal cohorts of The Cancer Genome Atlas
+  (4,972 samples) and on 60 small-sample draws, with both packages running the same default pipeline.
+  Every differential-expression call of the quasi-likelihood, likelihood-ratio and exact tests was
+  identical in every cohort and draw, and pathway analysis of both outputs on the eight cohorts gave the
+  same significant pathways. P-values differed by at most 1.2 × 10⁻⁵ (relative difference), and with
+  eight threads pyedger ran the full pipeline 3.4 to 3.5 times faster than edgeR on one thread. pyedger
+  is the edgeR backend of the bulk differential expression and Milo differential abundance analyses in
+  OmicVerse. It is available under the LGPL-3.0-or-later licence from PyPI and
+  https://github.com/omicverse/py-edgeR.
+keywords: [edgeR, differential expression, RNA-seq, negative binomial, quasi-likelihood, Python, OmicVerse]
+links:
+  code: https://github.com/omicverse/py-edgeR
+  api: ov.bulk.pyDEG
+thumbnail: fig1

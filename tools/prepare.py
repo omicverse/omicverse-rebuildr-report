@@ -30,6 +30,10 @@ from pathlib import Path
 import yaml
 
 ORG_HOME = "https://github.com/omicverse/omicverse-org-home.git"
+# The authors' standard declaration; a request can override it with `ai_declaration`.
+AI_DECLARATION = ("The authors used Claude Opus 5.5, GPT-6 Astra, and OmicOS to proofread grammar and syntax, "
+                  "improve readability. Any AI-assisted edits were reviewed by the authors, who take full "
+                  "responsibility for the content of this publication.")
 TEX_BIN = Path("/Library/TeX/texbin")          # MacTeX; on Linux TeX Live is usually on PATH already
 
 
@@ -78,6 +82,7 @@ def main() -> int:
     req.setdefault("type", "Technical Report")
     req.setdefault("version", 1)
     req.setdefault("org_home", ORG_HOME)
+    req.setdefault("ai_declaration", AI_DECLARATION)
     req["blind"] = bool(args.blind or req.get("blind"))
 
     W = args.workdir.expanduser().resolve()
