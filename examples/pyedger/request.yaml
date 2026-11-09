@@ -1,0 +1,33 @@
+# Request for the pyedger technical report (published at omicverse.org/articles/pyedger).
+# This is the input used to validate the pipeline: run it with --blind and compare the result
+# with the published report.
+
+port_repo: omicverse/py-edgeR          # GitHub owner/name, URL or local path; must contain report/
+package: pyedger                       # import / PyPI name used in the text
+upstream: edgeR                        # the R / Bioconductor package that was ported
+upstream_repo: https://bioconductor.org/packages/edgeR
+slug: pyedger                          # omicverse.org/articles/<slug>
+type: Technical Report
+published: 2026-11-09
+version: 1
+
+authors:
+  - {name: Zehua Zeng, affiliations: [1, 2], email: starlitnightly@gmail.com}
+  - {name: Meng Xu, affiliations: [3]}
+  - {name: Hongwu Du, affiliations: [4, 5], email: hongwudu@ustb.edu.cn}
+affiliations:
+  1: Department of Genetics, Stanford University, Stanford, CA 94305, USA
+  2: OmicVerse, Inc., San Francisco, CA, USA
+  3: Hubei Key Laboratory of Agricultural Bioinformatics, College of Informatics, Huazhong Agricultural University, Wuhan 430070, China
+  4: School of Chemistry and Biological Engineering, University of Science and Technology Beijing, Beijing 100083, China
+  5: Daxing Research Institute, University of Science and Technology Beijing, Beijing 100083, China
+
+links:
+  code: https://github.com/omicverse/py-edgeR
+  api: ov.bulk.pyDEG                   # how OmicVerse exposes the package (optional)
+
+# Optional
+# doi: 10.1101/xxxx                    # if the report also exists as a preprint
+# preprint: {server: bioRxiv, posted: 2026-01-01}
+# notes: >-                            # anything the evidence cannot tell (e.g. where the package is used)
+#   ...

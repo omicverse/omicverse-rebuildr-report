@@ -1,0 +1,30 @@
+# Request for one technical report. Only what the evidence cannot tell goes here.
+
+port_repo: omicverse/py-<pkg>          # GitHub owner/name, URL or local path; must contain report/
+# port_ref: v1.2.0                     # optional tag or branch (default: the default branch)
+package: py<pkg>                       # import / PyPI name, as written in the text
+upstream: <Pkg>                        # the R package that was ported
+upstream_repo: https://bioconductor.org/packages/<Pkg>   # or the CRAN / GitHub page
+slug: py<pkg>                          # omicverse.org/articles/<slug>
+type: Technical Report
+published: 2026-01-01
+version: 1
+# package_version: 1.2.0               # optional; default: version in the port's pyproject.toml
+# org_home: https://github.com/omicverse/omicverse-org-home.git   # default
+
+authors:                               # in order; an email marks a corresponding author
+  - {name: First Author, affiliations: [1, 2], email: first@example.org}
+  - {name: Second Author, affiliations: [3]}
+affiliations:
+  1: Department, Institution, City, Postcode, Country
+  2: OmicVerse, Inc., San Francisco, CA, USA
+  3: Department, Institution, City, Postcode, Country
+
+links:
+  code: https://github.com/omicverse/py-<pkg>
+  # api: ov.single.<function>          # how OmicVerse exposes the package, if it does
+
+# doi: 10.20944/preprints2026xx.xxxx.v1  # once the preprint is posted
+# preprint: {server: Preprints.org, posted: 2026-01-15}
+# notes: >-                            # anything else the writers should know
+#   ...
