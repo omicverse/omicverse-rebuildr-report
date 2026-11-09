@@ -91,6 +91,7 @@ references, numbers that cannot be traced to the evidence, leftover placeholders
 | `tools/figures.py` | figure PDF/PNG → 2400 px JPG for the article |
 | `tools/lint.py` | the static checks above → `review/lint.json` |
 | `tools/build.py` | builds the page and PDF with omicverse-org-home, checks the LaTeX log, renders every page to PNG |
+| `tools/compare.py` | compares two versions of a report (sections, words, references, numbers quoted, banned phrases) — for validating the pipeline |
 
 ## Validation
 
