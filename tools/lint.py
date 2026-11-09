@@ -57,8 +57,11 @@ PHRASE_WARNINGS = [
 REQUIRED = [("Introduction", r"^Introduction$"), ("Implementation", r"^Implementation$"),
             ("Comparison", r"^Comparison with "), ("Conclusion and future perspectives", r"^Conclusion and future perspectives$")]
 BACK_REQUIRED = [("Data and code availability", r"^Data and code availability$")]
-BUDGET = {"__main__": (1200, 2100), "Introduction": (230, 460), "Conclusion and future perspectives": (120, 320)}
-ABSTRACT_WORDS = (120, 230)
+BUDGET = {"__main__": (1200, 1700), "Introduction": (230, 400), "Conclusion and future perspectives": (120, 280)}
+ABSTRACT_WORDS = (120, 190)
+SUPP_METHODS_WORDS = 700
+LEGEND_WORDS = 180
+AI_HEADINGS = ("declaration of generative ai and ai-assisted technologies", "use of ai tools")
 LONG_SENTENCE = 45
 
 SUP = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹⁻", "0123456789-")
@@ -130,9 +133,11 @@ def main() -> int:
     for label, pat in BACK_REQUIRED:
         if not any(re.match(pat, s["name"]) for s in sections if s["kind"] == "back"):
             err("structure", f"missing back-matter section '#* {label}'")
-    for label in ("Use of AI tools", "Conflicts of interest"):
-        if not any(s["name"].lower() == label.lower() for s in sections if s["kind"] == "back"):
-            warn("structure", f"no '#* {label}' section (preprint servers require it; draft it for the authors to confirm)")
+    back_names = [s["name"].lower() for s in sections if s["kind"] == "back"]
+    if not any(n in AI_HEADINGS for n in back_names):
+        warn("structure", "no '#* Declaration of generative AI and AI-assisted technologies' section (preprint servers require it; use request.ai_declaration)")
+    if "conflicts of interest" not in back_names:
+        warn("structure", "no '#* Conflicts of interest' section (preprint servers require it; draft it for the authors to confirm)")
     if "References" not in names:
         err("structure", "missing '# References'")
     if not any(s["kind"] == "supp" for s in sections):
@@ -261,7 +266,7 @@ def main() -> int:
         return any(_match(src, val, sig) for src in pool)
 
     for where, text in scan + [("meta", json.dumps(meta.get("links", {})))]:
-        if where in ("Data and code availability",):
+        if where in ("Data and code availability", "Conflicts of interest") or where.lower() in AI_HEADINGS:
             continue
         for tok, val, sig in numbers_in(text):
             if traced(val, sig):
@@ -287,6 +292,21 @@ def main() -> int:
             n = words(s["lines"])
             if not lo <= n <= hi:
                 warn("length", f"'{s['name']}' has {n} words (aim for {lo}-{hi})")
+    supp_text, in_methods = [], False
+    for line in md.splitlines():
+        if line.startswith("## "):
+            in_methods = line.strip() == "## Supplementary methods"
+        elif line.startswith("# ") or line.startswith("#* "):
+            in_methods = False
+        elif in_methods:
+            supp_text.append(line)
+    n_supp = words(supp_text)
+    if n_supp > SUPP_METHODS_WORDS:
+        warn("length", f"'Supplementary methods' has {n_supp} words (keep it under {SUPP_METHODS_WORDS}: what a reader needs to reproduce, not every parameter the scripts already record)")
+    for m in re.finditer(r"^:::figure\s+(S?\d+)\s+\S+\n(.*?)\n(.*?)\n:::", md, re.S | re.M):
+        n_leg = len(re.sub(r"[$`*]", " ", m.group(3)).split())
+        if n_leg > LEGEND_WORDS:
+            warn("length", f"Fig. {m.group(1)} legend has {n_leg} words (keep it under {LEGEND_WORDS}; it must fit on the page with the figure)")
     for s in body_secs:
         for sent in sentences("\n".join(s["lines"])):
             n = len(sent.split())

@@ -14,7 +14,8 @@ Run before declaring a report done. Every box must be ticked or the reason writt
 ## Read the PDF (open every PNG in W/review/pages/)
 
 - [ ] page 1: title, authors with marks, affiliations, correspondence, summary, keywords
-- [ ] no figure or table alone on a page with a large empty area, no heading at the bottom of a page
+- [ ] five or six pages; no figure or table alone on a page with a large empty area, no heading at
+      the bottom of a page
 - [ ] Table 1 and Fig. 1 appear near where they are first cited
 - [ ] the supplement starts on a new page after the references
 - [ ] no text runs into the margin; inline code does not overflow a column
@@ -30,5 +31,7 @@ Run before declaring a report done. Every box must be ticked or the reason writt
 - [ ] no defensive asides; set-up details neutral and in Supplementary methods
 - [ ] future work lists what is not ported, as plans
 - [ ] figure legends describe each panel and match what the figure shows
-- [ ] Use of AI tools and Conflicts of interest present (marked for author confirmation)
+- [ ] the AI declaration is `request.ai_declaration` verbatim; Conflicts of interest present (for
+      the authors to confirm)
+- [ ] lint shows no `length` warnings (abstract, main text, supplementary methods, legends)
 - [ ] OmicVerse API names checked against the OmicVerse source
